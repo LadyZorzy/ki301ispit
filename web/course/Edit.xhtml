@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCourseTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCourseLabel_courseId}" for="courseId" />
+                    <h:inputText id="courseId" value="#{courseController.selected.courseId}" title="#{bundle.EditCourseTitle_courseId}" required="true" requiredMessage="#{bundle.EditCourseRequiredMessage_courseId}"/>
+                    <h:outputLabel value="#{bundle.EditCourseLabel_courseName}" for="courseName" />
+                    <h:inputText id="courseName" value="#{courseController.selected.courseName}" title="#{bundle.EditCourseTitle_courseName}" required="true" requiredMessage="#{bundle.EditCourseRequiredMessage_courseName}"/>
+                    <h:outputLabel value="#{bundle.EditCourseLabel_coursePrice}" for="coursePrice" />
+                    <h:inputText id="coursePrice" value="#{courseController.selected.coursePrice}" title="#{bundle.EditCourseTitle_coursePrice}" required="true" requiredMessage="#{bundle.EditCourseRequiredMessage_coursePrice}"/>
+                    <h:outputLabel value="#{bundle.EditCourseLabel_adminId}" for="adminId" />
+                    <h:selectOneMenu id="adminId" value="#{courseController.selected.adminId}" title="#{bundle.EditCourseTitle_adminId}" >
+                        <f:selectItems value="#{adminController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCourseLabel_studentId}" for="studentId" />
+                    <h:selectOneMenu id="studentId" value="#{courseController.selected.studentId}" title="#{bundle.EditCourseTitle_studentId}" >
+                        <f:selectItems value="#{studentController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCourseLabel_systemId}" for="systemId" />
+                    <h:selectOneMenu id="systemId" value="#{courseController.selected.systemId}" title="#{bundle.EditCourseTitle_systemId}" >
+                        <f:selectItems value="#{systemController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{courseController.update}" value="#{bundle.EditCourseSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCourseViewLink}"/>
+                <br />
+                <h:commandLink action="#{courseController.prepareList}" value="#{bundle.EditCourseShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCourseIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

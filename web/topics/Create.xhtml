@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTopicsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTopicsLabel_topicsId}" for="topicsId" />
+                    <h:inputText id="topicsId" value="#{topicsController.selected.topicsId}" title="#{bundle.CreateTopicsTitle_topicsId}" required="true" requiredMessage="#{bundle.CreateTopicsRequiredMessage_topicsId}"/>
+                    <h:outputLabel value="#{bundle.CreateTopicsLabel_topicsName}" for="topicsName" />
+                    <h:inputText id="topicsName" value="#{topicsController.selected.topicsName}" title="#{bundle.CreateTopicsTitle_topicsName}" required="true" requiredMessage="#{bundle.CreateTopicsRequiredMessage_topicsName}"/>
+                    <h:outputLabel value="#{bundle.CreateTopicsLabel_topicsContent}" for="topicsContent" />
+                    <h:inputTextarea rows="4" cols="30" id="topicsContent" value="#{topicsController.selected.topicsContent}" title="#{bundle.CreateTopicsTitle_topicsContent}" required="true" requiredMessage="#{bundle.CreateTopicsRequiredMessage_topicsContent}"/>
+                    <h:outputLabel value="#{bundle.CreateTopicsLabel_adminId}" for="adminId" />
+                    <h:selectOneMenu id="adminId" value="#{topicsController.selected.adminId}" title="#{bundle.CreateTopicsTitle_adminId}" >
+                        <f:selectItems value="#{adminController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{topicsController.create}" value="#{bundle.CreateTopicsSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{topicsController.prepareList}" value="#{bundle.CreateTopicsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTopicsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
